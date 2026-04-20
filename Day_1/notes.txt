@@ -1,0 +1,8 @@
+- to create folder
+   -mkdir 
+- create file 
+    - touch
+- change dir 
+  - cd filename
+- remove file 
+  - rn -rf 
