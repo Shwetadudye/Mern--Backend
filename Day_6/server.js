@@ -1,35 +1,53 @@
 const express = require('express')
 
-const fs = require('fs');
+const fs = require('fs')
 
-let PORT = 7000;
-let app = express();
-// middleware [json, text]
+const PORT = 7000;
 
-app.use(express.json());
-app.use(express.text());
+//server creation 
+//clg -> a c home d b 
 
-// read 
-app.get('/', (req,res)=>{
-   res.send('hello');
+const server = express()
+
+//first middleware
+server.use((req,res,next)=>{
+    console.log('a');
+    next();
+    console.log('b');
 });
 
-//create
+// second middleware 
 
-app.post('/create_note',(req,res)=>{
-    fs.writeFile('./data.json', JSON.stringify(req.body),(err)=>{
-        if(err){
-            console.log(err);
-        }
-    });
-    res.send(
-        `done the file has been create by this value -> ${JSON.stringify(res.body)}`,
-    );
+server.use((req,res,next)=>{
+    console.log('c');
+    next();
+    console.log('d');
 });
 
-// update 
-//delete 
-
-app.listen(PORT, '127.0.0.1',()=>{
-    console.log(`port is running on ${PORT}`);
+server.get('/',(req,res)=>{
+    console.log("'home':",'home');
+    res.send('home')
 });
+
+// server.get('/notes',(req,res)=>{
+//     fs.readFile('../Day_5/data.json', 'utf-8' ,(err,data)=>{
+//         if(err){
+//             console.log(err)
+//         }
+//         res.send(data);
+//         console.log(data);
+//         console.log('e')
+//     })
+// });
+
+server.get('/notes' ,(req,res)=>{
+const  data =  fs.readFileSync('../Day_5/data.json', 'utf-8');
+console.log(data);
+console.log('e');
+
+res.send(data);
+})
+
+server.listen(PORT, ()=>{
+    console.log(`server is running ${PORT}`)
+})
