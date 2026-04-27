@@ -2,7 +2,7 @@ const express = require('express');
 
 const studentRoutes= express.Router();
 studentRoutes.get('/',(req, res)=>{
-    res.send('srudent home page');
+    res.send('student home page');
 });
 
 studentRoutes.get('/allData',(req, res)=>{
