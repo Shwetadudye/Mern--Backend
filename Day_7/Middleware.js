@@ -25,6 +25,21 @@ server.get('/',(req, res)=>{
     res.send('home')
 });
 
+server.get('/weather',(req,res)=>{
+    console.log(req.query);
+    const weather= {
+        Bangaluru : 'summary',
+        London : 'spring',
+        Pakistan: 'Qayamat'
+    };
+
+    let city = req.query.city;
+    let weathers = weather[city];
+
+    res.send(
+        `${city} weather is ${weathers}`
+    )
+})
 server.post('/data',(req,res)=>{
     if(req.url==='/data'){
         let value= req.body;

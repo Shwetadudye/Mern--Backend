@@ -11,6 +11,12 @@ studentRoutes.get('/allData',(req, res)=>{
 
 studentRoutes.get('/student_boy', (req,res)=>{
     res.send('only boy student name .....')
+});
+
+studentRoutes.get('/student_boy/:id',(req,res)=>{
+   let std_id = req.params.id;
+
+   res.send(`student id is ${std_id}`)
 })
 
 module.exports = {studentRoutes};
