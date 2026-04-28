@@ -5,11 +5,38 @@ const {studentRoutes} = require('./Routes/Students.routes');
 
 const PORT = 7011;
 const server= express();
+server.use(express.json());
+
+const Auth = (req,res,next)=>{
+    const auths = req.body.auth;
+    console.log(auths);
+
+    if(!auths){
+        res.send('Bye you are not authorize');
+        console.log('auth middleware, if block invoked');
+    }else{
+        next();
+        console.log('auth middleware, else block and after next function invoked');
+    }
+};
 
 server.get('/',(req, res)=>{
     console.log('home');
     res.send('home')
 });
+
+server.post('/data',(req,res)=>{
+    if(req.url==='/data'){
+        let value= req.body;
+        console.log(value);
+        const data = fs.readFileSync('./package.json',{encoding:'utf-8'});
+        res.status(201).json({msg:'data created✅', data});
+    }else{
+        res.status(404).send('something went wrong❌');
+    }
+});
+
+server.use(Auth);
 
 server.use('/std', studentRoutes);
 
