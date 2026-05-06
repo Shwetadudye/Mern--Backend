@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 
 const {connection, userModel}= require('./db');
-//// const port = 7500;
+// const port = 7080;
 
 const PORT = process.env.PORT;
 const app = express();
@@ -14,16 +14,26 @@ app.get('/user', async(req ,res)=>{
 });
 
 //create
-// app.post('/userCreate', async(req,res)=>{
-//     let value = req.body;
-//     let userData = await userModel.insertOne(value);
-//     console.log(userData);
-//     res.send({msg:'data creates✅', data: userData});
-// })
+app.post('/userCreate', async(req,res)=>{
+    let value = req.body;
+    let userData = await userModel.insertOne(value);
+    console.log(userData);
+    res.send({msg:'data creates✅', data: userData});
+})
 
-//many
-//app.post('/many', async)
+//Many
+
+// app.get('/userCreate', async (req, res) => {
+//     const value = req.body;
+//     const userData = await userModule.updateMany(value);
+//     console.log(userData);
+//     res.send({msg:'data creates✅', data:userData});
+//   });
+
+
+
 app.listen(PORT, async()=>{
+
     try{
         await connection;
         console.log('DBis connected ✅');
