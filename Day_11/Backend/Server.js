@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-
+const cors = require('cors');
 
 //routes 
  const {Connection } = require('./config/db');
@@ -11,7 +11,7 @@ require('dotenv').config();
  const app = express(); // express invoked creating server 
 
  // middleware for conversion of body coming from clien side
- app.use(express.json(),express.text());
+ app.use(express.json(),express.text(),cors());
 
  //sign
 
