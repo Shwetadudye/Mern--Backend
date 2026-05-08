@@ -29,7 +29,29 @@ const cors = require('cors');
 
  //login 
 
- app.post('/login', (req,res)=>{
+ app.post('/login', async(req,res)=>{
+    if(req.body===undefined || (!req.body.email && !req.body.password)){
+        res.status(404).json({msg:'Not found or undefined'})
+    }
+
+    // to check user present or not
+
+    const findUser_DB = await authModel.find({email: req.body.email}||null);
+    console.log(findUser_DB);
+    console.log(findUser_DB[0]);
+
+    if(findUser_DB.length>0){
+        if(
+            req.body.email === findUser_DB[0].email &&
+            req.body.password === findUser_DB[0].password
+        ){
+            res.send('Profile Match ✅')
+        }else{
+            res.send('incorrect password❌')
+        }
+    } else{
+        res.send("you should siognup first becz your credintial is noty present in DB",)
+    }
     res.send('login')
  });
 
