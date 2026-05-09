@@ -5,8 +5,8 @@ const cors = require('cors');
 //routes 
  const {Connection } = require('./config/db');
  const {authModel} = require('./model/Auth.model');
- /*const {}= require('./routes/Todo.routes');
- const {}= require('./routes/User.routes');*/
+ const {TodoRoutes}= require('./routes/Todo.routes');
+ /*const {}= require('./routes/User.routes');*/
 
  const app = express(); // express invoked creating server 
 
@@ -14,16 +14,22 @@ const cors = require('cors');
  app.use(express.json(),express.text(),cors());
 
  //sign
-
  app.post('/signup', async(req , res)=>{
-    console.log(req.body);
+    console.log('req.body: in signup block',req.body);
     if(req.body===undefined ||(!req.body.email && !req.body.password)){
         res.status(404).json({msg:'Not found or undefined'});
     }else{
+        const existDBemail = await authModel.find(
+            {email:req.body.email} || null,
+        );
+        if(req.body.email === existDBemail[0]?.email){
+            res.send('you are already exist in db, please login');
+        }else{
         const userDataSave = new authModel(req.body);
         console.log(userDataSave);
         await userDataSave.save();
         res.status(201).send({msg:'created data in DB', data:userDataSave});
+        }
     }
  });
 
@@ -56,6 +62,8 @@ const cors = require('cors');
  });
 
  // routing on backend
+
+ app.use('/todo',TodoRoutes)
 
  // server start 
 

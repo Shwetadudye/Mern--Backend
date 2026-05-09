@@ -1,8 +1,9 @@
 import React from "react";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
 
+import { Api } from "../Utilis/Api";
 
-export const login =()=>{
+export const Login =()=>{
       
     const [userValue, setUserValue] = React.useState({
         email: '',
@@ -11,8 +12,7 @@ export const login =()=>{
 
       const handleFormSubmit =(e)=>{
         e.preventDefault();
-        axios
-        .post('http://localhost:7300/login', userValue) // axios automatically stringify the value .. if we use fetch then we have to do stringify
+        Api.post(location.pathname, userValue) // axios automatically stringify the value .. if we use fetch then we have to do stringify
         .then((res)=>console.log(res))
         .catch((err)=>console.log(err))
       }
