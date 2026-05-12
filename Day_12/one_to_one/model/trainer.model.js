@@ -1,13 +1,15 @@
 const mongoose= require("mongoose");
 const trainerSchema= mongoose.Schema(
     {
-        tech_stack : String,
+       employee_code: String,
+        tech_stack: [String],
         experience: Number
-    },{
+    },
+    {
         versionKey: false, 
     }
 )
 
-const trainerModel = mongoose.model('trainer', trainerSchema);
+const trainerModel = mongoose.model('Trainer', trainerSchema);
 
 module.exports = {trainerModel};
