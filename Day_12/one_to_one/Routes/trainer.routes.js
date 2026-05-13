@@ -1,4 +1,4 @@
-const express = require('express');
+   const express = require('express');
 const {trainerModel} = require('../model/trainer.model');
 const {userModel} = require('../model/user.model');
 
