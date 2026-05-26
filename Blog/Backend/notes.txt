@@ -1,0 +1,23 @@
+- npm init -y
+
+- npm i express nodemon dotenv mongoose jsonwebtoken bcrypt
+
+
+
+/login
+/signup
+
+/home
+
+/blog -> all data
+
+/blog/create-> created user blog  = user authorize
+/blog/delete -> delete user blog  
+/blog/update -> update user blog
+
+//remaining topics
+ecommerce -admin pannel 
+ecoommerce website 
+searchimg sorting  frontend
+summary 
+image :mullter
