@@ -1,0 +1,24 @@
+const express = require('express');
+require('dotenv').config();
+
+const { Connected } = require('./config/db');
+const { studentRoutes } = require('./routes/student.routes');
+const { courseRoutes } = require('./routes/course.routes');
+
+const app = express();
+
+app.use(express.json());
+
+app.use('/student', studentRoutes);
+app.use('/course', courseRoutes);
+
+app.listen(process.env.Port, async () => {
+  try {
+    await Connected;
+    console.log(`DB is Connected✅`);
+  } catch (error) {
+    console.log(`somethig went wrong ❌`);
+  } finally {
+    console.log(`port is running on ${process.env.Port}`);
+  }
+});
