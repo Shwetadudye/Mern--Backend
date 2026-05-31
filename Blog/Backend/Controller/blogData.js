@@ -16,13 +16,12 @@ const getBlog = async (req, res) => {
   db -> product key ->[ title, rating, category]
   */
 
-  const blogs = await blogModel.find();
+  const allblogs = await blogModel.find();
 
-  const keySetup = blogs.reduce((acc, curr) => {
+  const keySetup = allblogs.reduce((acc, curr) => {
     console.log(`🚀 ~ curr:`, curr);
     console.log(Object.keys(curr));
-
-    // return acc;
+    return acc;
   }, []);
   console.log(`🚀 ~ keySetup:`, keySetup);
 
