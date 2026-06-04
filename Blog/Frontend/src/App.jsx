@@ -1,14 +1,12 @@
-import { useState } from 'react'
+import React from 'react';
+import { AllRoutes } from './Routes/AllRoutes';
+import { Navbar } from './Components/Navbar';
 
-
-export const  App=()=> {
-
-
+export const App = () => {
   return (
     <>
-     <div>App</div>
+      <Navbar />
+      <AllRoutes />
     </>
-  )
-}
-
-
+  );
+};

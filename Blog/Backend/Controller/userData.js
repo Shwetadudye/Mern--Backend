@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
       res.send('please enter somthing to save in DB...');
     }
   } catch (error) {
-    res.send('something went wrong...');
+    res.send('something went wrong...', error);
   }
 };
 
@@ -42,7 +42,8 @@ export const login = async (req, res) => {
   try {
     if (req.body) {
       const userData = await userModel.findOne({ email: req.body.email });
-      console.log(`🚀 ~ userData:`, userData._id);
+      console.log(`🚀 ~ userData:`, userData);
+      console.log(`🚀 ~ userData:`, userData?._id);
 
       if (userData) {
         bcrypt.compare(
@@ -54,8 +55,8 @@ export const login = async (req, res) => {
             }
             if (data) {
               const token = await jwt.sign(
-                { userDetails: userData._id },
-                process.env.PrivateKey,
+                { userID: userData?._id },
+                process.env?.PrivateKey,
               );
               res.send({ msg: 'user successfully logged-in', token });
             }
@@ -64,12 +65,14 @@ export const login = async (req, res) => {
         );
         // res.send(`🚀 ~ userData:`, userData);
       } else {
-        res.send(`user not present in DB, please signup first...`);
+        res
+          .status(404)
+          .send({ msg: `user not present in DB, please signup first...` });
       }
     } else {
       res.send(`please enter somthing in body`);
     }
   } catch (error) {
-    res.send(`🚀 ~ error:`, error);
+    res.send(`something went wrong`);
   }
 };

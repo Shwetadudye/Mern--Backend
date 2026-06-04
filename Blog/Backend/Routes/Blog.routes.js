@@ -11,11 +11,6 @@ import { blogModel } from '../model/Blog.model.js';
 
 const blogRoutes = express.Router();
 
-blogRoutes.get('/', async (req, res) => {
-  const blogs = await blogModel.find().populate('author');
-  res.send(blogs);
-});
-
 // /blog/createBlog
 
 blogRoutes.post('/createBlog', createBlog);
