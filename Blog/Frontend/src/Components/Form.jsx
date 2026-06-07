@@ -2,7 +2,6 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { blogApi } from '../Utils/Api';
-// import PropTypes from 'prop-types';
 
 export const Form = ({ props }) => {
   const location = useLocation();
@@ -27,8 +26,21 @@ export const Form = ({ props }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await blogApi.post(`/user${location.pathname}`, form);
-      console.log(`🚀 ~ res:`, res);
+      const formCheck = Object.values(form).reduce((acc, curr) => {
+        acc = curr.length > 0 ? true : false;
+        return acc;
+      });
+      console.log(`🚀 ~ formCheck:`, formCheck);
+
+      if (formCheck) {
+        let res = await blogApi.post(`/user${location.pathname}`, form);
+        console.log(`🚀 ~ res:`, res.data);
+
+        // if (Object.keys(res.data).includes('token')) {
+        // }
+      } else {
+        alert('please fill all the fields');
+      }
     } catch (error) {
       console.log('error', error);
     }

@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 import { Connection } from './config/db.js';
@@ -11,7 +12,7 @@ import { blogModel } from './model/Blog.model.js';
 
 const server = express();
 
-server.use(express.json(), cors());
+server.use(express.json(), cors(),cookieParser());
 
 server.get('/', async (req, res) => {
   const blogs = await blogModel.find().populate('author');

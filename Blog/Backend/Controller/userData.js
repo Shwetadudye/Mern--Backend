@@ -5,10 +5,25 @@ dotenv.config();
 
 import { userModel } from '../model/User.model.js';
 
+const validation = (value) => {
+  for (let key in value) {
+    if (value[key].trim() !== '') {
+      console.count('loop');
+      continue;
+    }
+    return false;
+  }
+  return true;
+};
+
 export const signup = async (req, res) => {
   try {
-    if (req.body) {
-      const find_User_In_DB = await userModel.findOne(req.body);
+    const deepChecks = validation(req.body);
+    if (deepChecks) {
+      const find_User_In_DB = await userModel.findOne({
+        email: req.body.email,
+      });
+      console.log(`🚀 ~ find_User_In_DB:`, find_User_In_DB);
       if (find_User_In_DB) {
         res.send('user already exist in DB please login');
       } else {
@@ -34,40 +49,42 @@ export const signup = async (req, res) => {
       res.send('please enter somthing to save in DB...');
     }
   } catch (error) {
-    res.send('something went wrong...', error);
+    res.send({ msg: 'something went wrong...', error });
   }
 };
 
 export const login = async (req, res) => {
   try {
-    if (req.body) {
+    const deepChecks = validation(req.body);
+    if (deepChecks) {
       const userData = await userModel.findOne({ email: req.body.email });
       console.log(`🚀 ~ userData:`, userData);
-      console.log(`🚀 ~ userData:`, userData?._id);
 
       if (userData) {
         bcrypt.compare(
-          req.body.password,
-          userData.password,
+          req.body?.password,
+          userData?.password,
           async function (err, data) {
             if (err) {
-              res.send(err);
-            }
-            if (data) {
+              res.send({ msg: 'this is error in compare', err });
+            } else if (data) {
               const token = await jwt.sign(
-                { userID: userData?._id },
+                {
+                  userID: userData?._id,
+                  iat: Math.floor(Date.now() / 1000),
+                  exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60,
+                },
                 process.env?.PrivateKey,
               );
               res.send({ msg: 'user successfully logged-in', token });
+            } else {
+              res.send({ msg: 'password not correct❌❗', response: req.body });
             }
-            res.send({ msg: 'password not correct❌❗', response: req.body });
           },
         );
         // res.send(`🚀 ~ userData:`, userData);
       } else {
-        res
-          .status(404)
-          .send({ msg: `user not present in DB, please signup first...` });
+        res.send({ msg: `user not present in DB, please signup first...` });
       }
     } else {
       res.send(`please enter somthing in body`);

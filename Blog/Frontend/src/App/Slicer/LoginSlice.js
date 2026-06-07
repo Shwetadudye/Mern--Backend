@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { cookiesFunc } from '../../Utils';
+
 const LoginSlice = createSlice({
   name: 'login',
   initialState: {
-    data: [],
+    token: cookiesFunc() || '',
+    isAuth: cookiesFunc() ? true : false,
     isLoading: false,
     isError: false,
   },

@@ -7,10 +7,10 @@ export const auth = (req, res, next) => {
     if (err) {
       res.send(`error in token verification ${err}`);
     }
-    console.log(`🚀 ~ decoded:`, decoded);
-    res.userCode = decoded.userID;
 
+    console.log(`🚀 ~ decoded:`, decoded);
     if (decoded) {
+      req.userCode = decoded;
       next();
     }
     // res.send({ msg: 'decode Data', data: decoded });

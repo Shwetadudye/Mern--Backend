@@ -16,20 +16,21 @@ const getBlog = async (req, res) => {
   db -> product key ->[ title, rating, category]
   */
 
-  const allblogs = await blogModel.find();
+  const blogs = await blogModel.find();
 
-  const keySetup = allblogs.reduce((acc, curr) => {
+  const keySetup = blogs.reduce((acc, curr) => {
     console.log(`🚀 ~ curr:`, curr);
     console.log(Object.keys(curr));
-    return acc;
+
+    // return acc;
   }, []);
   console.log(`🚀 ~ keySetup:`, keySetup);
 
   // const search =
 
-  const blogs = await blogModel.find(search).sort(sort);
+  // const blogs = await blogModel.find(search).sort(sort);
 
-  res.send(blogs);
+  // res.send(blogs);
 };
 
 const createBlog = async (req, res) => {
@@ -59,6 +60,7 @@ const deleteBlog = async (req, res) => {
   }
   res.send('something went wrong...');
 };
+
 const updateOneBlog = () => {};
 const updateManyBlog = () => {};
 
