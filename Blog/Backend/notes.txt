@@ -2,18 +2,27 @@
 
 - npm i express nodemon dotenv mongoose jsonwebtoken bcrypt
 
-
+Token
 
 /login
+fields:name email password 
+ 
 /signup
+fields required : name email password
 
 /home
 
-/blog -> all data
+/blog -> all blog data
+/blog/create-> created user blog  = user authorize method:post
+/blog/delete -> delete user blog  method:delete
+/blog/update -> update user blog  method:patch
+/blog/updateOneBlog method:patch
+/blog/updateManyBlog method:put
+blog/getBlog method:get
 
-/blog/create-> created user blog  = user authorize
-/blog/delete -> delete user blog  
-/blog/update -> update user blog
+/user-> all users  method:-get
+/user/signup method:-post
+/user/login  method:-post
 
 //remaining topics
 ecommerce -admin pannel 
@@ -23,8 +32,8 @@ summary
 image :mullter
 
 
-//backend doc 
+//backend doc ✅
 //update blog updatemany blog 
-// readme 
+// readme ✅
 //status code
 

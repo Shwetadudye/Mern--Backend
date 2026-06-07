@@ -25,11 +25,11 @@ export const signup = async (req, res) => {
       });
       console.log(`🚀 ~ find_User_In_DB:`, find_User_In_DB);
       if (find_User_In_DB) {
-        res.send('user already exist in DB please login');
+        res.status(409).send('user already exist in DB please login');
       } else {
         bcrypt.genSalt(+process.env.saltRounds, async function (err, salt) {
           if (err) {
-            res.send(
+            res.status(500).send(
               `this is error which i got in generate_salt method ${err}`,
             );
           }
@@ -37,11 +37,11 @@ export const signup = async (req, res) => {
             console.log(`🚀 ~ hash:`, hash);
             // Store hash in your password DB.
             if (err) {
-              res.send(`this is error which i got in has method ${err}`);
+              res.status(500).send(`this is error which i got in has method ${err}`);
             }
             req.body.password = hash;
             const userCreted = await userModel.create(req.body);
-            res.send(userCreted);
+            res.status(201).send({msg: 'User Created Sucessfully',userCreted});
           });
         });
       }
@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
       res.send('please enter somthing to save in DB...');
     }
   } catch (error) {
-    res.send({ msg: 'something went wrong...', error });
+    res.status.send({ msg: 'something went wrong...', error });
   }
 };
 
@@ -66,7 +66,7 @@ export const login = async (req, res) => {
           userData?.password,
           async function (err, data) {
             if (err) {
-              res.send({ msg: 'this is error in compare', err });
+              res.status(500).send({ msg: 'this is error in compare', err });
             } else if (data) {
               const token = await jwt.sign(
                 {
@@ -76,9 +76,9 @@ export const login = async (req, res) => {
                 },
                 process.env?.PrivateKey,
               );
-              res.send({ msg: 'user successfully logged-in', token });
+              res.status(200).send({ msg: 'user successfully logged-in', token });
             } else {
-              res.send({ msg: 'password not correct❌❗', response: req.body });
+              res.status(401).send({ msg: 'password not correct❌❗', response: req.body });
             }
           },
         );
@@ -90,6 +90,6 @@ export const login = async (req, res) => {
       res.send(`please enter somthing in body`);
     }
   } catch (error) {
-    res.send(`something went wrong`);
+    res.status(500).send(`something went wrong`);
   }
 };
