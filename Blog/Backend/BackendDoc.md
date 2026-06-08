@@ -1,12 +1,10 @@
 # Backend Documentation
 
-> Base Url : http://localhost:8080
+> 🔗 Base Url : http://localhost:8080
 
-* ## User Management Documentation 
+* ## 👤 User Management Documentation 
 
-  
-
-  1. ### Get All Users Data
+  1. ###  Get All Users Data
      * method :  **GET**
      * EndPoint :  **/user**
 
@@ -38,20 +36,20 @@
         ```
 
 
-* ## Blog Management Documentation 
+* ##  Blog Management Documentation 
   1. ### Get All Blogs Data
      * method :  **GET**
      * EndPoint :  **/blog**
 
-  2. ### Create User Blog
+  2. ### 📥Create User Blog
      * method :  **POST**
      * EndPoint : **/createBlog**
 
-  3. ### Delete User Blog
+  3. ### ❌ Delete User Blog
      * method : **DELETE**
      * EndPoint : **/deleteBlog/:_id**
 
-  4. ### Update One Blog 
+  4. ### ✏️Update One Blog 
      * method : **PATCH**
      * EndPoint : **/updateOneBlog/:id**
 
@@ -59,7 +57,7 @@
      * method : **PUT**
      * EndPoint : **/updateManyBlog**
 
-  6. ### Get Blog (Search)
+  6. ### 🔍Get Blog (Search)
      * method : **POST**
      * EndPoint : **/getBlog**
 
