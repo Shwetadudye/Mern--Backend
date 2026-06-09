@@ -33,6 +33,15 @@ const getBlog = async (req, res) => {
   // res.send(blogs);
 };
 
+const singleBlog = async (req, res) => {
+  const blogId = req.params;
+  if (blogId.id) {
+    const data = await blogModel.findOne({ _id: blogId.id });
+    res.send(data);
+  }
+  res.send('id is not present');
+};
+
 const createBlog = async (req, res) => {
   if (req.body) {
     const authorID = await userModel.findOne({ _id: req.userCode.userID });
@@ -40,7 +49,7 @@ const createBlog = async (req, res) => {
       ...req.body,
       author: authorID._id,
     });
-    res.status(201).send(blogData);
+    res.send(blogData);
   } else {
     res.send('please enter any thing in body');
   }
@@ -52,16 +61,23 @@ const deleteBlog = async (req, res) => {
   if (req.params && res.userCode == userDetail._id) {
     const data = await blogModel.deleteOne(req.params);
     // const data = await blogModel.findByIdAndDelete(req.params);
-    res.status(200).send({
+    res.send({
       msg: `data has been deleted`,
       data,
       id: req.params,
     });
   }
-  res.status(500).send('something went wrong...');
+  res.send('something went wrong...');
 };
 
 const updateOneBlog = () => {};
 const updateManyBlog = () => {};
 
-export { createBlog, deleteBlog, updateManyBlog, updateOneBlog, getBlog };
+export {
+  singleBlog,
+  createBlog,
+  deleteBlog,
+  updateManyBlog,
+  updateOneBlog,
+  getBlog,
+};

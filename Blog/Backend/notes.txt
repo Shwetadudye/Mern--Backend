@@ -35,5 +35,6 @@ image :mullter
 //backend doc ✅
 //update blog updatemany blog 
 // readme ✅
-//status code
+//status code 
+// decode-. frontend mei kaise bhejenge 
 

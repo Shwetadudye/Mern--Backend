@@ -6,10 +6,15 @@ import {
   updateManyBlog,
   updateOneBlog,
   getBlog,
+  singleBlog,
 } from '../Controller/blogData.js';
 import { blogModel } from '../model/Blog.model.js';
 
 const blogRoutes = express.Router();
+
+// single blog => /blog/id
+
+blogRoutes.get('/:id', singleBlog);
 
 // /blog/createBlog
 
