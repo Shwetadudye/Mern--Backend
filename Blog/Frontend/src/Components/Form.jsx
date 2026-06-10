@@ -2,9 +2,16 @@ import React from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { blogApi } from '../Utils/Api';
+import { LoginData } from '../App/Slicer/LoginSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Form = ({ props }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
+
+  const value = useSelector((store) => store.auth);
+  console.log(`🚀 ~ value:`, value);
+
   const [form, setForm] = React.useState(
     props.data?.reduce((acc, curr) => {
       acc[curr.name] = '';
@@ -30,12 +37,11 @@ export const Form = ({ props }) => {
         acc = curr.length > 0 ? true : false;
         return acc;
       });
-      console.log(`🚀 ~ formCheck:`, formCheck);
 
       if (formCheck) {
         let res = await blogApi.post(`/user${location.pathname}`, form);
         console.log(`🚀 ~ res:`, res.data);
-
+        dispatch(LoginData(res.data));
         // if (Object.keys(res.data).includes('token')) {
         // }
       } else {

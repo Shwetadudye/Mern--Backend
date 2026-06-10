@@ -1,17 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { cookiesFunc } from '../../Utils';
+import { setCookiesFunc, getCookiesFunc } from '../../Utils/Cookies';
 
 const LoginSlice = createSlice({
   name: 'login',
   initialState: {
-    token: cookiesFunc() || '',
-    isAuth: cookiesFunc() ? true : false,
+    token: getCookiesFunc() ?? '',
+    isAuth: getCookiesFunc() ? true : false,
     isLoading: false,
     isError: false,
   },
   reducers: {
-    LoginData: (state, action) => {},
+    LoginData: (state, action) => {
+      if (action.payload && Object.keys(action.payload).includes('token')) {
+        setCookiesFunc(action.payload?.token);
+        return {
+          ...state,
+          token: getCookiesFunc(),
+          isAuth: true,
+        };
+      }
+    },
   },
 });
 

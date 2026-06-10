@@ -43,6 +43,7 @@ const singleBlog = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
+  console.log(`🚀 ~ req.body:`, req);
   if (req.body) {
     const authorID = await userModel.findOne({ _id: req.userCode.userID });
     const blogData = await blogModel.create({
