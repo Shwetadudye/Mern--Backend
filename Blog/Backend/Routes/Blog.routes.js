@@ -3,7 +3,6 @@ import express from 'express';
 import {
   createBlog,
   deleteBlog,
-  updateManyBlog,
   updateOneBlog,
   getBlog,
   singleBlog,
@@ -27,7 +26,7 @@ blogRoutes.delete('/deleteBlog/:_id', deleteBlog);
 blogRoutes.patch('/updateOneBlog/:id', updateOneBlog);
 
 // /blog/updateManyBlog
-blogRoutes.put('/updateManyBlog', updateManyBlog);
+// blogRoutes.put('/updateManyBlog', updateManyBlog);
 
 // /blog/getBlog
 blogRoutes.post('/getBlog', getBlog);

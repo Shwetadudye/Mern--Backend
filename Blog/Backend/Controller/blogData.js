@@ -67,18 +67,12 @@ const deleteBlog = async (req, res) => {
       data,
       id: req.params,
     });
+  } else {
+    res.send('something went wrong...');
   }
-  res.send('something went wrong...');
 };
 
 const updateOneBlog = () => {};
-const updateManyBlog = () => {};
+// const updateManyBlog = () => {};
 
-export {
-  singleBlog,
-  createBlog,
-  deleteBlog,
-  updateManyBlog,
-  updateOneBlog,
-  getBlog,
-};
+export { singleBlog, createBlog, deleteBlog, updateOneBlog, getBlog };

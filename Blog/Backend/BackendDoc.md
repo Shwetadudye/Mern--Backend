@@ -2,68 +2,70 @@
 
 > 🔗 Base Url : http://localhost:8080
 
-* ## 👤 User Management Documentation 
+- ## 👤 User Management Documentation
+  1.  ### Get All Users Data
+      - method : **GET**
+      - EndPoint : **/user**
 
-  1. ###  Get All Users Data
-     * method :  **GET**
-     * EndPoint :  **/user**
+  2.  ### For User Signup
+      - method: **POST**
+      - EndPoint : **/user/signup**
 
-  2. ### For User Signup 
-     * method: **POST**
-     * EndPoint : **/user/signup**
+      - #### Required Fields For Signup
 
-     * #### Required Fields For Signup
-
-       ```json 
-       {
-        "name":"String",
-        "email": "String",
-        "password": "String"
-       }
+        ```json
+        {
+          "name": "String",
+          "email": "String",
+          "password": "String"
+        }
         ```
 
-  3. ### For User Login 
-     * method: **POST**
-     * EndPoint : **/user/login**
+  3.  ### For User Login
+      - method: **POST**
+      - EndPoint : **/user/login**
 
-     * #### Required Fields For Login
-       ```json 
-       {
-        "name":"String",
-        "email": "String",
-        "password": "String"
-       }
+      - #### Required Fields For Login
+        ```json
+        {
+          "name": "String",
+          "email": "String",
+          "password": "String"
+        }
         ```
 
-
-* ##  Blog Management Documentation 
+- ## Blog Management Documentation
   1. ### Get All Blogs Data
-     * method :  **GET**
-     * EndPoint :  **/blog**
+     - method : **GET**
+     - EndPoint : **/blog**
 
   2. ### 📥Create User Blog
-     * method :  **POST**
-     * EndPoint : **/createBlog**
+     - method : **POST**
+     - EndPoint : **/createBlog**
+     - #### Required Fields For Blog
+
+       ```json
+       {
+         "title": "String",
+         "discription": "String",
+         "category": "String",
+         "content": "String",
+         "rating": "Number"
+       }
+       ```
 
   3. ### ❌ Delete User Blog
-     * method : **DELETE**
-     * EndPoint : **/deleteBlog/:_id**
+     - method : **DELETE**
+     - EndPoint : **/deleteBlog/:\_id**
 
-  4. ### ✏️Update One Blog 
-     * method : **PATCH**
-     * EndPoint : **/updateOneBlog/:id**
+  4. ### ✏️Update One Blog
+     - method : **PATCH**
+     - EndPoint : **/updateOneBlog/:id**
 
-  5. ### Update Many Blog 
-     * method : **PUT**
-     * EndPoint : **/updateManyBlog**
+  5. ### Update Many Blog
+     - method : **PUT**
+     - EndPoint : **/updateManyBlog**
 
   6. ### 🔍Get Blog (Search)
-     * method : **POST**
-     * EndPoint : **/getBlog**
-
-
-  
-    
-
-
-
+     - method : **POST**
+     - EndPoint : **/getBlog**

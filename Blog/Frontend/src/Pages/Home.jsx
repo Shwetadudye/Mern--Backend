@@ -1,8 +1,10 @@
 import React from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import { BlogData } from '../App/Slicer/BlogSlice';
 import { blogApi } from './../Utils/Api';
+import { Buttons } from '../Components/Buttons';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -21,22 +23,55 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="flex justify-center item-center w-[80%] m-auto">
-      {isLoading ? (
-        <h1>Loading.....</h1>
-      ) : (
-        data &&
-        data?.map((el) => {
-          return (
-            <div key={el._id} style={{ border: '2px solid red' }}>
-              <h1>{el.title}</h1>
-              <h3>{el.category}</h3>
-              <h4>{el.discription}</h4>
-              <h5>{el.rate}</h5>
-            </div>
-          );
-        })
-      )}
-    </div>
+    <>
+      <Buttons
+        style={{
+          background: '#238636',
+          color: '#fff',
+          flot: 'right',
+        }}
+        name={'create_blog'}
+        type={'button'}
+      />
+      <div className="flex justify-center item-center w-[80%] m-auto">
+        {isLoading ? (
+          <h1>Loading.....</h1>
+        ) : (
+          data &&
+          data?.map((el) => {
+            return (
+              <NavLink
+                to={`/blog/${el._id}`}
+                key={el._id}
+                style={{ border: '2px solid red' }}
+              >
+                <h1>{el.title}</h1>
+                <h3>{el.category}</h3>
+                <h4>{el.discription}</h4>
+                <h5>{el.rate}</h5>
+                <Buttons
+                  style={{
+                    background: 'red',
+                    color: '#fff',
+                    flot: 'right',
+                  }}
+                  name={'delete_blog'}
+                  type={'button'}
+                />
+                <Buttons
+                  style={{
+                    background: 'tomato',
+                    color: '#fff',
+                    flot: 'right',
+                  }}
+                  name={'edit_blog'}
+                  type={'button'}
+                />
+              </NavLink>
+            );
+          })
+        )}
+      </div>
+    </>
   );
 };

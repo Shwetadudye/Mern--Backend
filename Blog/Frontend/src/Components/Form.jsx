@@ -36,7 +36,7 @@ export const Form = ({ props }) => {
       const formCheck = Object.values(form).reduce((acc, curr) => {
         acc = curr.length > 0 ? true : false;
         return acc;
-      });
+      }, false);
 
       if (formCheck) {
         let res = await blogApi.post(`/user${location.pathname}`, form);
