@@ -72,7 +72,11 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-const updateOneBlog = () => {};
+const updateOneBlog = async(req, res) => {
+  const blogId = req.params.id;
+  
+  const blogdata = await BlogData.findByIdandUpdate(blogId);
+};
 // const updateManyBlog = () => {};
 
 export { singleBlog, createBlog, deleteBlog, updateOneBlog, getBlog };
