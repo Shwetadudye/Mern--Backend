@@ -4,7 +4,7 @@ import { blogApi } from '../Utils/Api';
 import { useLocation } from 'react-router-dom';
 
 export const CreateBlog = () => {
-  const location = useLocation();
+  //const location = useLocation();
   const [blog, setBlog] = React.useState({
     title: '',
     discription: '',
@@ -13,40 +13,40 @@ export const CreateBlog = () => {
     rating: '',
   });
 
-  const handleChange = (e) => {
-    let { name, value } = e.target;
+//   const handleChange = (e) => {
+//     let { name, value } = e.target;
 
-    setBlog((prev) => {
-      if (Object.keys(prev)[Object.keys(prev).length - 1] === name) {
-        value = +value;
-      }
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const formCheck = Object.values(blog).reduce((acc, curr) => {
-        acc = curr.toString().trim() != '' ? true : false;
-        return acc;
-      }, false);
+//     setBlog((prev) => {
+//       if (Object.keys(prev)[Object.keys(prev).length - 1] === name) {
+//         value = +value;
+//       }
+//       return {
+//         ...prev,
+//         [name]: value,
+//       };
+//     });
+//   };
+//   const handleSubmit = async (e) => {
+//     try {
+//       e.preventDefault();
+//       const formCheck = Object.values(blog).reduce((acc, curr) => {
+//         acc = curr.toString().trim() != '' ? true : false;
+//         return acc;
+//       }, false);
 
-      /*   const formCheck = Object.values(blog).every(
-        (value) => value.toString().trim() !== '',
- */
-      if (formCheck) {
-        let res = await blogApi.post(`${location.pathname}`, blog);
-        console.log(`🚀 ~ res:`, res.data);
-      } else {
-        alert('please fill all the fields');
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
+//       /*   const formCheck = Object.values(blog).every(
+//         (value) => value.toString().trim() !== '',
+//  */
+//       if (formCheck) {
+//         let res = await blogApi.post(`${location.pathname}`, blog);
+//         console.log(`🚀 ~ res:`, res.data);
+//       } else {
+//         alert('please fill all the fields');
+//       }
+//     } catch (error) {
+//       console.log('error', error);
+//     }
+//   };
 
   return (
     <form

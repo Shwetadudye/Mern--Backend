@@ -24,6 +24,7 @@ export const Home = () => {
 
   return (
     <>
+    <div className="w-[80%] mx-auto flex justify-between  mb-5">
       <Buttons
         style={{
           background: '#238636',
@@ -33,7 +34,8 @@ export const Home = () => {
         name={'create_blog'}
         type={'button'}
       />
-      <div className="flex justify-center item-center w-[80%] m-auto">
+      </div>
+      <div className="flex justify-center item-center w-[80%] m-auto gap-4">
         {isLoading ? (
           <h1>Loading.....</h1>
         ) : (
@@ -43,21 +45,15 @@ export const Home = () => {
               <NavLink
                 to={`/blog/${el._id}`}
                 key={el._id}
-                style={{ border: '2px solid red' }}
-              >
-                <h1>{el.title}</h1>
-                <h3>{el.category}</h3>
-                <h4>{el.discription}</h4>
-                <h5>{el.rate}</h5>
-                <Buttons
-                  style={{
-                    background: 'red',
-                    color: '#fff',
-                    flot: 'right',
-                  }}
-                  name={'delete_blog'}
-                  type={'button'}
-                />
+                className="bg-white rounded-xl shadow-lg border border-gray-200 p-5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                >
+               
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{el.title}</h1>
+                <span className="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm mb-3">{el.category}</span>
+                <h4 className="text-gray-600 mb-4 line-clamp-3">{el.discription}</h4>
+                <h5 className="text-yellow-500 font-bold text-lg mb-4">{el.rating}</h5>
+              
+              <div className="flex gap-3">
                 <Buttons
                   style={{
                     background: 'tomato',
@@ -67,6 +63,17 @@ export const Home = () => {
                   name={'edit_blog'}
                   type={'button'}
                 />
+                <Buttons
+                  style={{
+                    background: 'red',
+                    color: '#fff',
+                    flot: 'right',
+                  }}
+                  name={'delete_blog'}
+                  type={'button'}
+                />
+  
+                </div>
               </NavLink>
             );
           })

@@ -23,7 +23,7 @@ blogRoutes.post('/createBlog', createBlog);
 blogRoutes.delete('/deleteBlog/:_id', deleteBlog);
 
 // /blog/updateOneBlog
-blogRoutes.patch('/updateOneBlog/:id', updateOneBlog);
+blogRoutes.patch('/updateOneBlog/:_id', updateOneBlog);
 
 // /blog/updateManyBlog
 // blogRoutes.put('/updateManyBlog', updateManyBlog);

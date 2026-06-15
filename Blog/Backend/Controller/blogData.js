@@ -72,11 +72,33 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-const updateOneBlog = async(req, res) => {
-  const blogId = req.params.id;
-  
-  const blogdata = await BlogData.findByIdandUpdate(blogId);
-};
+const updateOneBlog =async(req,res) => {
+  const data = req.body;
+  //  res.send(data);
+
+  const blogID = req.params._id;
+  // res.send(blogID)
+
+   const existingBlogPost = await blogModel.findOne({_id:blogID})
+  // res.send(existingBlogPost)
+
+//   if(!existingBlogPost){
+//     res.status(302).redirect("blog/createBlog")
+//   }
+//   if(blogID !== existingBlogPost.blogID){
+//     res.send(`you're not authorize person`)
+//   } else{
+//     try{
+//       let blogupdate = await blogModel.findByIdAndUpdate({
+//         _id: blogID
+//       },data);
+//       res.send({msg:`updated ${blogupdate} with id ${blogID}`})
+//     } catch(error){
+//       console.log(error)
+
+//     }
+//   }
+ };
 // const updateManyBlog = () => {};
 
 export { singleBlog, createBlog, deleteBlog, updateOneBlog, getBlog };
