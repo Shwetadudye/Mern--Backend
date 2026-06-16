@@ -5,8 +5,11 @@ import { NavLink } from 'react-router-dom';
 import { BlogData } from '../App/Slicer/BlogSlice';
 import { blogApi } from './../Utils/Api';
 import { Buttons } from '../Components/Buttons';
-
+import { CreateBlog } from './CreateBlog';
+import { EditBlog } from './EditBlog';
 export const Home = () => {
+  const [showCreateForm, setShowCreateForm] = React.useState(false);
+  const [showEditForm, setShowEditForm] = React.useState(false);
   const dispatch = useDispatch();
 
   const { data, isLoading } = useSelector((state) => state.Blog);
@@ -31,9 +34,25 @@ export const Home = () => {
           color: '#fff',
           flot: 'right',
         }}
+        onClick={() => setShowCreateForm(true)}
         name={'create_blog'}
         type={'button'}
       />
+      {showCreateForm && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg relative w-[500px]">
+            
+            <button
+              className="absolute top-2 right-3 text-xl"
+              onClick={() => setShowCreateForm(false)}
+            >
+              ✕
+            </button>
+
+            <CreateBlog />
+          </div>
+        </div>
+      )}
       </div>
       <div className="flex justify-center item-center w-[80%] m-auto gap-4">
         {isLoading ? (
@@ -62,7 +81,23 @@ export const Home = () => {
                   }}
                   name={'edit_blog'}
                   type={'button'}
+                  onClick={() => setShowEditForm(true)}
                 />
+              {showEditForm && (
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg relative w-[500px]">
+            
+            <button
+              className="absolute top-2 right-3 text-xl"
+              onClick={() => setShowEditForm(false)}
+            >
+              ✕
+            </button>
+
+            <EditBlog />
+          </div>
+        </div>
+      )}
                 <Buttons
                   style={{
                     background: 'red',

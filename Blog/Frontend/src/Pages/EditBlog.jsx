@@ -1,7 +1,7 @@
 import React from 'react';
 import { BlogForm } from '../Components/BlogForm';
 
-export const CreateBlog = () => {
+export const EditBlog = () => {
   const data = [
     {
       _id: 1,
@@ -38,7 +38,7 @@ export const CreateBlog = () => {
   return (
     <BlogForm
       data={data}
-      name="Create Blog"
+      name="edit Blog"
     />
   );
 };

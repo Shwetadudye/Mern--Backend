@@ -10,6 +10,7 @@ export const Navbar = () => {
     { path: '/login', element: 'login' },
     { path: '/signup', element: 'signup' },
     { path: '/blog/createBlog', element: 'createblog' },
+    { path: '/blog/updateOneBlog/:_id', element: 'editblog' },
   ];
 
   return (
