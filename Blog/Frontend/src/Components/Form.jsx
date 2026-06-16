@@ -53,7 +53,8 @@ export const Form = ({ props }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}
+    >
       {props.data?.map((el) => {
         return (
           <div key={el._id}>

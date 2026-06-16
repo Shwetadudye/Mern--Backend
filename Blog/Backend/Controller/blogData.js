@@ -72,14 +72,42 @@ const deleteBlog = async (req, res) => {
   }
 };
 
-const updateOneBlog =async(req,res) => {
-  const data = req.body;
-  //  res.send(data);
+const updateOneBlog = async (req, res) => {
+//   try {
+//     const userDetail = await userModel.findById(req.userCode.userID);
 
-  const blogID = req.params._id;
-  // res.send(blogID)
+//     if (!userDetail) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
 
-   const existingBlogPost = await blogModel.findOne({_id:blogID})
+//     const blogId = req.params._id;
+
+//     const blog = await blogModel.findById(blogId);
+
+//     if (!blog) {
+//       return res.status(404).json({ message: "Blog not found" });
+//     }
+//      const updatedBlog = await blogModel.findByIdAndUpdate(
+//       blogId,
+//       req.body,
+//       { new: true }
+//     );
+
+//     res.status(200).json({
+//       message: "Blog updated successfully",
+//       updatedBlog,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+ };
+  // const blogID = req.params._id;
+  // res.send(blogID);
+
+  // const userID = req.params.
+   
+
+  //  const existingBlogPost = await blogModel.findOne({_id:blogID})
   // res.send(existingBlogPost)
 
 //   if(!existingBlogPost){
@@ -98,7 +126,6 @@ const updateOneBlog =async(req,res) => {
 
 //     }
 //   }
- };
 // const updateManyBlog = () => {};
 
 export { singleBlog, createBlog, deleteBlog, updateOneBlog, getBlog };
